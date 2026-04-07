@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-adhd: #FF6B6B;
+    --color-anxiety: #FFE66D;
+    --color-autism: #4ECDC4;
+    --color-bipolar: #A78BFA;
+    --color-cross: #6B7280;
+    --color-eating: #F472B6;
+    --color-mdd: #3B82F6;
+    --color-ocd: #F97316;
+    --color-other: #9CA3AF;
+    --color-ptsd: #EF4444;
+    --color-scz: #10B981;
+    --color-substance: #8B5CF6;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #334155;
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #475569;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-800/50 rounded-xl;
+  }
+
+  .glass-panel-hover {
+    @apply glass-panel transition-all duration-300 hover:border-slate-700/50 hover:bg-slate-900/80 hover:shadow-lg hover:shadow-slate-900/50;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 40px currentColor;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(167, 139, 250, 0.1));
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #3B82F6, #A78BFA, #10B981);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
+
+  .gradient-border:hover::before {
+    opacity: 0.6;
+  }
+
+  .stat-number {
+    @apply font-mono text-3xl font-bold tracking-tight;
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .plotly-container {
+    @apply rounded-xl overflow-hidden;
+  }
+
+  .plotly-container .js-plotly-plot .plotly .main-svg {
+    border-radius: 0.75rem;
+  }
+
+  .table-row-hover {
+    @apply transition-colors duration-150 hover:bg-slate-800/50;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+/* Plotly overrides for dark theme */
+.js-plotly-plot .plotly .modebar {
+  top: 8px !important;
+  right: 8px !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn path {
+  fill: #94a3b8 !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn:hover path {
+  fill: #e2e8f0 !important;
+}

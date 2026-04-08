@@ -3,14 +3,17 @@ name: Deploy Dashboard
 on:
   push:
     branches: [main]
-    paths: ["dashboard/**"]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write
       id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,4 +23,5 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dashboard/dist
-      - uses: actions/deploy-pages@v4
+      - id: deployment
+        uses: actions/deploy-pages@v4
